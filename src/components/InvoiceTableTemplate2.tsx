@@ -126,14 +126,17 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                 className="bg-transparent"
               />
             </div>
-            <div className="p-2 border-r border-black">
-              <EditableField
-                type="number"
-                value={item.price.toString()}
-                onChange={(val) => handleItemChange(index, 'price', Number(val))}
-                align="right"
-                className="bg-transparent"
-              />
+            <div className="p-2 border-r border-black flex items-start justify-end">
+              <span className="mr-1 mt-1 text-gray-600">Rp</span>
+              <div className="w-24">
+                <EditableField
+                  type="number"
+                  value={item.price.toString()}
+                  onChange={(val) => handleItemChange(index, 'price', Number(val))}
+                  align="right"
+                  className="bg-transparent"
+                />
+              </div>
             </div>
             {data.settings.showDiscount && (
               <div className="p-2 border-r border-black whitespace-nowrap text-center">
@@ -158,7 +161,7 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
               </div>
             )}
             <div className="p-2 text-right">
-              {formatCurrency(calculateRowTotal(item)).replace('Rp', '').trim()}
+              {formatCurrency(calculateRowTotal(item))}
             </div>
             
             <div className="absolute -right-8 top-2 opacity-0 group-hover:opacity-100 transition-opacity print:hidden">
@@ -198,13 +201,18 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
               {data.settings.showTax && renderRow("Pajak", formatCurrency(totalTax))}
               {renderRow("Total", formatCurrency(grandTotal))}
               {renderRow("Pembayaran Diterima", (
-                <EditableField
-                  type="number"
-                  value={amountPaid.toString()}
-                  onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
-                  align="right"
-                  className="bg-transparent w-full"
-                />
+                <div className="flex items-start justify-end w-full">
+                  <span className="mr-1 mt-1 text-gray-600">Rp</span>
+                  <div className="w-24">
+                    <EditableField
+                      type="number"
+                      value={amountPaid.toString()}
+                      onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
+                      align="right"
+                      className="bg-transparent"
+                    />
+                  </div>
+                </div>
               ))}
               {renderRow("Sisa Tagihan", formatCurrency(balanceDue))}
             </>

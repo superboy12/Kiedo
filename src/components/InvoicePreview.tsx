@@ -137,14 +137,17 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
             <div className="text-right font-bold text-black mt-2 pt-2 border-t border-gray-300 underline text-2xl">{formatCurrency(grandTotal)}</div>
 
             <div className="text-right font-bold text-gray-800 mt-4">Pembayaran Diterima</div>
-            <div className="text-right font-bold text-gray-800 mt-4 flex justify-end">
-              <EditableField
-                type="number"
-                value={(data.amountPaid || 0).toString()}
-                onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
-                align="right"
-                className="bg-transparent"
-              />
+            <div className="text-right font-bold text-gray-800 mt-4 flex justify-end items-start gap-1">
+              <span className="mt-1">Rp</span>
+              <div className="w-32">
+                <EditableField
+                  type="number"
+                  value={(data.amountPaid || 0).toString()}
+                  onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
+                  align="right"
+                  className="bg-transparent"
+                />
+              </div>
             </div>
 
             <div className="text-right font-bold text-gray-800 mt-2">Sisa Tagihan</div>
