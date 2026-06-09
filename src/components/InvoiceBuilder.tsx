@@ -1,0 +1,128 @@
+'use client';
+
+import React, { useRef } from 'react';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import { InvoicePreview } from './InvoicePreview';
+import { defaultInvoiceData } from '../constants/defaultData';
+import { useAutosave } from '../hooks/useAutosave';
+import { Download } from 'lucide-react';
+
+export default function InvoiceBuilder() {
+  const [data, setData] = useAutosave('invoice-data-v1', defaultInvoiceData);
+  const invoiceRef = useRef<HTMLDivElement>(null);
+
+  const handleDownload = async () => {
+    if (!invoiceRef.current) return;
+
+    try {
+      const element = invoiceRef.current;
+      const canvas = await html2canvas(element, {
+        scale: 2, // higher scale for better resolution
+        useCORS: true,
+        logging: false,
+      });
+
+      const imgData = canvas.toDataURL('image/png');
+      
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4',
+      });
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`invoice-${data.referenceNo.replace(/\//g, '-')}.pdf`);
+    } catch (error) {
+      console.error('Failed to generate PDF', error);
+      alert('Gagal membuat PDF.');
+    }
+  };
+
+  const updateSettings = (key: keyof typeof data.settings, value: boolean) => {
+    setData({
+      ...data,
+      settings: {
+        ...data.settings,
+        [key]: value
+      }
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-8 px-4 flex flex-col items-center">
+      <div className="w-full max-w-[900px]">
+        {/* Invoice Area */}
+        <div className="shadow-lg mb-8">
+          <InvoicePreview data={data} onChange={setData} innerRef={invoiceRef} />
+        </div>
+
+        {/* Controls Section (Below Invoice) */}
+        <div className="flex justify-between items-start mb-8 bg-white p-6 rounded-lg shadow-sm border border-gray-200 print:hidden">
+          <div className="flex flex-col gap-3">
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={data.settings.showDiscount}
+                onChange={(e) => updateSettings('showDiscount', e.target.checked)}
+                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Tampilkan diskon</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={data.settings.showTax}
+                onChange={(e) => updateSettings('showTax', e.target.checked)}
+                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Tampilkan pajak</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={data.settings.showUnit}
+                onChange={(e) => updateSettings('showUnit', e.target.checked)}
+                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
+              />
+              <span className="text-sm text-gray-700">Tampilkan satuan</span>
+            </label>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <span className="text-sm font-bold text-gray-700 mb-2">Template</span>
+            <div className="border-2 border-blue-500 p-1 rounded">
+              <div className="w-[100px] h-[140px] bg-gray-100 border border-gray-200">
+                 {/* Mini preview thumbnail placeholder */}
+                 <div className="w-full h-full flex flex-col p-2">
+                    <div className="w-1/3 h-2 bg-blue-200 mb-2"></div>
+                    <div className="w-full h-[1px] bg-gray-300 mb-1"></div>
+                    <div className="w-1/2 h-1 bg-gray-300 mb-4"></div>
+                    <div className="w-full h-4 bg-[#2F3E56] mb-1"></div>
+                    <div className="w-full h-2 bg-gray-200 mb-1"></div>
+                 </div>
+              </div>
+            </div>
+            <button className="mt-2 bg-blue-500 text-white text-xs px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+              Ganti Template
+            </button>
+          </div>
+        </div>
+
+        {/* Download Button */}
+        <div className="flex justify-center mb-16 print:hidden">
+          <button
+            onClick={handleDownload}
+            className="bg-[#28A745] text-white px-8 py-4 rounded-md text-xl font-bold flex items-center gap-2 hover:bg-green-600 transition-colors shadow-lg"
+          >
+            <Download className="w-6 h-6" />
+            Download Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
