@@ -119,6 +119,22 @@ export const AutoPasteModal: React.FC<AutoPasteModalProps> = ({ isOpen, onClose,
         }
       }
 
+      // 4.5 Amount Paid (Default to fully paid by reading Total)
+      const totalIndex = lines.findIndex(l => l.toLowerCase() === 'total' || l.toLowerCase().startsWith('total rp'));
+      if (totalIndex !== -1) {
+        const lineText = lines[totalIndex];
+        let numStr = lineText.toLowerCase().replace('total', '').trim();
+        if (!numStr && totalIndex + 1 < lines.length) {
+          numStr = lines[totalIndex + 1];
+        }
+        if (numStr) {
+          partialData.amountPaid = cleanNumber(numStr);
+          if (partialData.settings) {
+            partialData.settings.status = 'Lunas';
+          }
+        }
+      }
+
       // 5. Notes / Pesan
       const pesanIndex = lines.findIndex(l => l.toLowerCase() === 'pesan');
       const hormatIndex = lines.findIndex(l => l.toLowerCase().includes('dengan hormat'));
