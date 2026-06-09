@@ -177,39 +177,36 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
       </div>
 
       {/* Totals Section */}
-      <div className="flex justify-end mt-0">
-        <div className="w-[350px] border-l border-r border-b border-black">
-          <div className="flex border-b border-black">
-            <div className="flex-1 p-2 border-r border-black">Subtotal</div>
-            <div className="flex-1 p-2 text-right">{formatCurrency(subtotal)}</div>
-          </div>
-          {data.settings.showTax && (
-            <div className="flex border-b border-black">
-              <div className="flex-1 p-2 border-r border-black">Pajak</div>
-              <div className="flex-1 p-2 text-right">{formatCurrency(totalTax)}</div>
+      <div className="flex flex-col border-r border-black w-full">
+        {(() => {
+          const emptyColumnsCount = 3 + (data.settings.showDiscount ? 1 : 0) + (data.settings.showTax ? 1 : 0);
+          
+          const renderRow = (label: React.ReactNode, value: React.ReactNode) => (
+            <div className="grid w-full" style={{ gridTemplateColumns: gridColumns }}>
+              <div style={{ gridColumn: `span ${emptyColumnsCount}` }}></div>
+              <div className="p-2 border-l border-r border-b border-black bg-white">{label}</div>
+              <div className="p-2 border-b border-black text-right bg-white flex justify-end items-center">{value}</div>
             </div>
-          )}
-          <div className="flex border-b border-black">
-            <div className="flex-1 p-2 border-r border-black">Total</div>
-            <div className="flex-1 p-2 text-right">{formatCurrency(grandTotal)}</div>
-          </div>
-          <div className="flex border-b border-black">
-            <div className="flex-1 p-2 border-r border-black">Pembayaran Diterima</div>
-            <div className="flex-1 p-2 text-right flex justify-end">
-              <EditableField
-                type="number"
-                value={amountPaid.toString()}
-                onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
-                align="right"
-                className="bg-transparent"
-              />
-            </div>
-          </div>
-          <div className="flex">
-            <div className="flex-1 p-2 border-r border-black">Sisa Tagihan</div>
-            <div className="flex-1 p-2 text-right">{formatCurrency(balanceDue)}</div>
-          </div>
-        </div>
+          );
+
+          return (
+            <>
+              {renderRow("Subtotal", formatCurrency(subtotal))}
+              {data.settings.showTax && renderRow("Pajak", formatCurrency(totalTax))}
+              {renderRow("Total", formatCurrency(grandTotal))}
+              {renderRow("Pembayaran Diterima", (
+                <EditableField
+                  type="number"
+                  value={amountPaid.toString()}
+                  onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
+                  align="right"
+                  className="bg-transparent w-full"
+                />
+              ))}
+              {renderRow("Sisa Tagihan", formatCurrency(balanceDue))}
+            </>
+          );
+        })()}
       </div>
     </div>
   );
