@@ -9,7 +9,16 @@ export function useAutosave<T>(key: string, initialValue: T): [T, (value: T) => 
     try {
       const item = window.localStorage.getItem(key);
       if (item) {
-        setStoredValue(JSON.parse(item));
+        const parsed = JSON.parse(item);
+        // Shallow merge top level, and specifically merge settings
+        setStoredValue({
+          ...initialValue,
+          ...parsed,
+          settings: {
+            ...(initialValue as any).settings,
+            ...(parsed.settings || {})
+          }
+        });
       }
     } catch (error) {
       console.error(error);

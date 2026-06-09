@@ -50,7 +50,7 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
             <div className="flex"><span className="mr-2">:</span><EditableField value={data.dueDate} onChange={(val) => updateField('dueDate', val)} /></div>
             
             <div className="text-left text-gray-800">Status</div>
-            <div className="flex"><span className="mr-2">:</span><EditableField value={data.settings.status || 'Dibayar Sebagian'} onChange={(val) => updateField('status', val)} /></div>
+            <div className="flex"><span className="mr-2">:</span><EditableField value={data.settings.status || 'Dibayar Sebagian'} onChange={(val) => onChange({ ...data, settings: { ...data.settings, status: val } })} /></div>
           </div>
 
           <div>
