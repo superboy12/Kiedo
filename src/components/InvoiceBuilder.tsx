@@ -22,7 +22,9 @@ export default function InvoiceBuilder() {
         pixelRatio: 2,
         filter: (node) => {
           // Exclude elements that are meant to be hidden in print/image
-          if (node instanceof HTMLElement && node.classList?.contains('print:hidden')) {
+          // Avoid instanceof HTMLElement as it can fail in cloned contexts
+          const el = node as any;
+          if (el && el.classList && typeof el.classList.contains === 'function' && el.classList.contains('print:hidden')) {
             return false;
           }
           return true;
