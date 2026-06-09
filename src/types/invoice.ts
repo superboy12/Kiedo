@@ -25,13 +25,16 @@ export interface InvoiceData {
 
   amountPaid: number;
 
-  settings: {
-    showDiscount: boolean;
-    showTax: boolean;
-    showUnit: boolean;
-    templateId: string;
-    status: string;
-  };
+  settings: InvoiceSettings;
+}
+
+export interface InvoiceSettings {
+  showDiscount: boolean;
+  showTax: boolean;
+  showUnit?: boolean;
+  showLogo?: boolean;
+  templateId?: string;
+  status?: string;
 }
 
 export interface InvoiceItem {

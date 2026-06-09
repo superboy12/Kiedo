@@ -48,12 +48,14 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
       {/* HEADER */}
       <div className="flex justify-between items-start mb-12">
         <div className="w-[40%]">
-          <ImageUpload
-            value={data.companyLogo}
-            onChange={(val) => updateField('companyLogo', val)}
-            label="Upload Logo"
-            width="180px"
-          />
+          {data.settings.showLogo !== false && (
+            <ImageUpload
+              value={data.companyLogo}
+              onChange={(val) => updateField('companyLogo', val)}
+              label="Upload Logo"
+              width="180px"
+            />
+          )}
         </div>
         <div className="w-[50%] flex flex-col items-end text-sm">
           <EditableField

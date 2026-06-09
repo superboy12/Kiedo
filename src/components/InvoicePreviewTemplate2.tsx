@@ -22,13 +22,22 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
       {/* HEADER SECTION */}
       <div className="flex justify-between items-start mb-12">
         <div className="w-[45%] flex flex-col items-center">
-          <ImageUpload
-            value={data.companyLogo}
-            onChange={(val) => updateField('companyLogo', val)}
-            label="Upload Logo"
-            width="250px"
-            className="mb-4"
-          />
+          {data.settings.showLogo !== false ? (
+            <ImageUpload
+              value={data.companyLogo}
+              onChange={(val) => updateField('companyLogo', val)}
+              label="Upload Logo"
+              width="250px"
+              className="mb-4"
+            />
+          ) : (
+            <EditableField 
+              value={data.companyName} 
+              onChange={(val) => updateField('companyName', val)} 
+              className="text-[28px] font-bold text-[#1a202c] text-center block mb-2 leading-tight" 
+              align="center" 
+            />
+          )}
           <EditableField value={data.companyAddress} onChange={(val) => updateField('companyAddress', val)} className="text-sm text-center block mb-0" align="center" />
           <EditableField value={data.companyPhone} onChange={(val) => updateField('companyPhone', val)} className="text-sm text-center block mb-0" align="center" />
         </div>

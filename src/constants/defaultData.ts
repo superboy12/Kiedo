@@ -42,6 +42,7 @@ export const defaultInvoiceData: InvoiceData = {
     showDiscount: true,
     showTax: true,
     showUnit: true,
+    showLogo: true,
     templateId: 'template1',
     status: 'Dibayar Sebagian'
   }
