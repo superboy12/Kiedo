@@ -30,9 +30,9 @@ export const defaultInvoiceData: InvoiceData = {
   ],
 
   notes: '',
-  
-  signatureImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMTAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjEwMCI+PHBhdGggZD0iTSA1MCA3MCBRIDcwIDIwIDgwIDUwIFQgMTEwIDUwIFQgMTQwIDcwIFEgMTYwIDMwIDE3MCA1MCBUIDIwMCA0MCBUIDIzMCA2MCBRIDI1MCA4MCAyNzAgNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFlM2E4YSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=',
-  signatoryName: 'Budi Santoso',
+
+  signatureImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMTAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjEwMCI+PHBhdGggZD0iTSAzMCA3MCBDIDIwIDUwLCA0MCAxMCwgNjAgMTAgQyA4MCAxMCwgNDAgODAsIDcwIDgwIEMgMTAwIDgwLCAxMTAgNTAsIDEzMCA2MCBDIDE1MCA3MCwgMTYwIDQwLCAxODAgNTAgQyAyMDAgNjAsIDIxMCA1MCwgMjMwIDYwIEMgMjUwIDcwLCAyNzAgNTAsIDI4MCA1MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWUzYThhIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==',
+  signatoryName: 'Lukman Hakim',
   signatoryRole: 'Finance Manager',
 
   amountPaid: 0,
