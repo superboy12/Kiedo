@@ -39,5 +39,7 @@ export const defaultInvoiceData: InvoiceData = {
     showDiscount: true,
     showTax: true,
     showUnit: false,
+    templateId: 'template1',
+    status: 'Dibayar Sebagian'
   }
 };

@@ -27,6 +27,8 @@ export interface InvoiceData {
     showDiscount: boolean;
     showTax: boolean;
     showUnit: boolean;
+    templateId: string;
+    status: string;
   };
 }
 
