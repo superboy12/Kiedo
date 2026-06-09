@@ -164,7 +164,7 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
         ))}
       </div>
 
-      <div className="mt-4">
+      <div className="mt-4 print:hidden">
         <button
           onClick={addItem}
           className="text-blue-500 border border-blue-500 px-4 py-2 rounded text-sm hover:bg-blue-50 flex items-center gap-1 transition-colors"

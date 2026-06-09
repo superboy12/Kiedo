@@ -20,6 +20,13 @@ export default function InvoiceBuilder() {
       const dataUrl = await htmlToImage.toPng(element, {
         quality: 1,
         pixelRatio: 2,
+        filter: (node) => {
+          // Exclude elements that are meant to be hidden in print/image
+          if (node instanceof HTMLElement && node.classList?.contains('print:hidden')) {
+            return false;
+          }
+          return true;
+        }
       });
       
       const link = document.createElement('a');
