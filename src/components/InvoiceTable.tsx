@@ -62,13 +62,13 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
   };
 
   const gridColumns = [
-    '2fr', // Produk
-    '3fr', // Deskripsi
-    '1fr', // Kuantitas
-    '1.5fr', // Harga
-    data.settings.showDiscount ? '1fr' : null,
-    data.settings.showTax ? '1.5fr' : null,
-    '1.5fr', // Jumlah
+    'minmax(0, 2fr)', // Produk
+    'minmax(0, 3fr)', // Deskripsi
+    'minmax(0, 1fr)', // Kuantitas
+    'minmax(0, 1.5fr)', // Harga
+    data.settings.showDiscount ? 'minmax(0, 1fr)' : null,
+    data.settings.showTax ? 'minmax(0, 1.5fr)' : null,
+    'minmax(0, 1.5fr)', // Jumlah
     '30px' // delete button spacing
   ].filter(Boolean).join(' ');
 

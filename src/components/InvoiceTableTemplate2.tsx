@@ -66,14 +66,17 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
   const grandTotal = subtotal + totalTax;
 
   const gridColumns = [
-    '2fr', // Produk
-    '3fr', // Deskripsi
-    '1fr', // Kuantitas
-    '1.5fr', // Harga
-    data.settings.showDiscount ? '1fr' : null,
-    data.settings.showTax ? '1.5fr' : null,
-    '1.5fr' // Jumlah
+    'minmax(0, 2fr)', // Produk
+    'minmax(0, 3fr)', // Deskripsi
+    'minmax(0, 1fr)', // Kuantitas
+    'minmax(0, 1.5fr)', // Harga
+    data.settings.showDiscount ? 'minmax(0, 1fr)' : null,
+    data.settings.showTax ? 'minmax(0, 1.5fr)' : null,
+    'minmax(0, 1.5fr)' // Jumlah
   ].filter(Boolean).join(' ');
+
+  const amountPaid = data.amountPaid || 0;
+  const balanceDue = grandTotal - amountPaid;
 
   return (
     <div className="w-full text-sm mt-8">
@@ -192,11 +195,19 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
           </div>
           <div className="flex border-b border-black">
             <div className="flex-1 p-2 border-r border-black">Pembayaran Diterima</div>
-            <div className="flex-1 p-2 text-right">{formatCurrency(922636.36)}</div>
+            <div className="flex-1 p-2 text-right flex justify-end">
+              <EditableField
+                type="number"
+                value={amountPaid.toString()}
+                onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
+                align="right"
+                className="bg-transparent"
+              />
+            </div>
           </div>
           <div className="flex">
             <div className="flex-1 p-2 border-r border-black">Sisa Tagihan</div>
-            <div className="flex-1 p-2 text-right">{formatCurrency(72363.64)}</div>
+            <div className="flex-1 p-2 text-right">{formatCurrency(balanceDue)}</div>
           </div>
         </div>
       </div>

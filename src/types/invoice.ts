@@ -23,6 +23,8 @@ export interface InvoiceData {
   signatoryName: string;
   signatoryRole: string;
 
+  amountPaid: number;
+
   settings: {
     showDiscount: boolean;
     showTax: boolean;
