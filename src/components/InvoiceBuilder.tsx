@@ -6,14 +6,16 @@ import { InvoicePreview } from './InvoicePreview';
 import { InvoicePreviewTemplate2 } from './InvoicePreviewTemplate2';
 import { defaultInvoiceData } from '../constants/defaultData';
 import { useAutosave } from '../hooks/useAutosave';
-import { Download, Save, History, FilePlus } from 'lucide-react';
+import { Download, Save, History, FilePlus, ClipboardPaste } from 'lucide-react';
 import { InvoiceData } from '../types/invoice';
 import { InvoiceHistoryModal } from './InvoiceHistoryModal';
+import { AutoPasteModal } from './AutoPasteModal';
 
 export default function InvoiceBuilder() {
   const [data, setData] = useAutosave('invoice-data-v1', defaultInvoiceData);
   const [history, setHistory] = useState<InvoiceData[]>([]);
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+  const [isAutoPasteOpen, setIsAutoPasteOpen] = useState(false);
   const invoiceRef = useRef<HTMLDivElement>(null);
 
   // Load history from local storage
@@ -81,6 +83,20 @@ export default function InvoiceBuilder() {
         settings: data.settings
       });
     }
+  };
+
+  const handleAutoPasteApply = (partialData: Partial<InvoiceData>) => {
+    setData({
+      ...data,
+      ...partialData,
+      // Merge items carefully if we want, but let's just replace them if they exist
+      items: partialData.items && partialData.items.length > 0 ? partialData.items : data.items,
+      settings: {
+        ...data.settings,
+        ...(partialData.settings || {})
+      }
+    });
+    alert('Data berhasil diterapkan dari teks!');
   };
 
   const handleDownload = async () => {
@@ -223,6 +239,14 @@ export default function InvoiceBuilder() {
           <div className="w-px h-12 bg-gray-300 mx-2 hidden sm:block"></div>
 
           <button
+            onClick={() => setIsAutoPasteOpen(true)}
+            className="flex items-center gap-2 px-6 py-3 bg-amber-500 text-white font-bold rounded-lg hover:bg-amber-600 transition-colors shadow-sm"
+          >
+            <ClipboardPaste className="w-5 h-5" />
+            Auto-Isi Teks
+          </button>
+
+          <button
             onClick={handleSaveToHistory}
             className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-colors shadow-sm"
           >
@@ -254,6 +278,12 @@ export default function InvoiceBuilder() {
         history={history}
         onLoad={setData}
         onDelete={handleDeleteHistoryItem}
+      />
+
+      <AutoPasteModal
+        isOpen={isAutoPasteOpen}
+        onClose={() => setIsAutoPasteOpen(false)}
+        onApply={handleAutoPasteApply}
       />
     </div>
   );
