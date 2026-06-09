@@ -29,8 +29,8 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
             width="250px"
             className="mb-4"
           />
-          <EditableField value={data.companyAddress} onChange={(val) => updateField('companyAddress', val)} className="text-sm text-center block mb-1" align="center" />
-          <EditableField value={data.companyPhone} onChange={(val) => updateField('companyPhone', val)} className="text-sm text-center block mb-1" align="center" />
+          <EditableField value={data.companyAddress} onChange={(val) => updateField('companyAddress', val)} className="text-sm text-center block mb-0" align="center" />
+          <EditableField value={data.companyPhone} onChange={(val) => updateField('companyPhone', val)} className="text-sm text-center block mb-0" align="center" />
         </div>
         
         <div className="w-[50%] flex flex-col justify-start">
@@ -40,7 +40,7 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
             className="text-[32px] font-bold text-[#1a202c] mb-6"
             align="left"
           />
-          <div className="grid grid-cols-[120px_auto] gap-y-1 text-sm mb-8">
+          <div className="grid grid-cols-[120px_auto] gap-y-0 text-sm mb-6">
             <div className="text-left text-gray-800">Referensi</div>
             <div className="flex"><span className="mr-2">:</span><EditableField value={data.referenceNo} onChange={(val) => updateField('referenceNo', val)} /></div>
             
@@ -55,10 +55,10 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
           </div>
 
           <div>
-            <h2 className="font-bold text-sm mb-4 text-gray-800">Tagihan Kepada</h2>
-            <EditableField value={data.customerName} onChange={(val) => updateField('customerName', val)} className="font-bold text-[#1a202c] block mb-2" />
-            <EditableField value={data.customerAddress} onChange={(val) => updateField('customerAddress', val)} className="block text-gray-800 text-sm mb-1" />
-            <EditableField value={data.customerPhone} onChange={(val) => updateField('customerPhone', val)} className="block text-gray-800 text-sm mb-1" />
+            <h2 className="font-bold text-sm mb-2 text-gray-800">Tagihan Kepada</h2>
+            <EditableField value={data.customerName} onChange={(val) => updateField('customerName', val)} className="font-bold text-[#1a202c] block mb-0" />
+            <EditableField value={data.customerAddress} onChange={(val) => updateField('customerAddress', val)} className="block text-gray-800 text-sm mb-0" />
+            <EditableField value={data.customerPhone} onChange={(val) => updateField('customerPhone', val)} className="block text-gray-800 text-sm mb-0" />
             <EditableField value={data.customerEmail} onChange={(val) => updateField('customerEmail', val)} className="block text-gray-800 text-sm" />
           </div>
         </div>
