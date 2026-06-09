@@ -10,8 +10,6 @@ interface InvoiceTableTemplate2Props {
 export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ data, onChange }) => {
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(value);
@@ -126,13 +124,14 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                 className="bg-transparent"
               />
             </div>
-            <div className="p-2 border-r border-black">
+            <div className="p-2 border-r border-black flex justify-between items-start">
+              <span className="text-gray-600 mr-2">Rp</span>
               <EditableField
                 type="number"
                 value={item.price.toString()}
                 onChange={(val) => handleItemChange(index, 'price', Number(val))}
                 align="right"
-                className="bg-transparent"
+                className="bg-transparent w-full"
                 displayValue={formatCurrency(item.price)}
               />
             </div>
@@ -158,8 +157,11 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                 />%
               </div>
             )}
-            <div className="p-2 text-right">
-              {formatCurrency(calculateRowTotal(item))}
+            <div className="p-2 flex justify-between items-start">
+              <span className="text-gray-600 mr-2">Rp</span>
+              <div className="text-right">
+                {formatCurrency(calculateRowTotal(item))}
+              </div>
             </div>
             
             <div className="absolute -right-8 top-2 opacity-0 group-hover:opacity-100 transition-opacity print:hidden">
@@ -180,7 +182,10 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                 {emptyContent}
               </div>
               <div className="p-2 border-l border-r border-b border-black bg-white">{label}</div>
-              <div className="p-2 border-b border-black text-right bg-white flex justify-end items-center">{value}</div>
+              <div className="p-2 border-b border-black bg-white flex justify-between items-start">
+                <span className="text-gray-600 mr-2">Rp</span>
+                <div className="text-right w-full">{value}</div>
+              </div>
             </div>
           );
 

@@ -10,8 +10,6 @@ interface InvoiceTableProps {
 export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) => {
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(value);
@@ -119,13 +117,14 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
                 className="bg-transparent"
               />
             </div>
-            <div className="p-3">
+            <div className="p-3 flex justify-between items-start">
+              <span className="text-gray-600 mr-2">Rp</span>
               <EditableField
                 type="number"
                 value={item.price.toString()}
                 onChange={(val) => handleItemChange(index, 'price', Number(val))}
                 align="right"
-                className="bg-transparent"
+                className="bg-transparent w-full"
                 displayValue={formatCurrency(item.price)}
               />
             </div>
@@ -152,8 +151,11 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
                 %
               </div>
             )}
-            <div className="p-3 text-right font-medium">
-              {formatCurrency(calculateRowTotal(item))}
+            <div className="p-3 flex justify-between items-start font-medium">
+              <span className="text-gray-600 mr-2">Rp</span>
+              <div className="text-right">
+                {formatCurrency(calculateRowTotal(item))}
+              </div>
             </div>
             <div className="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity print:hidden">
               <button onClick={() => removeItem(index)} className="text-red-500 hover:text-red-700 font-bold px-2">&times;</button>

@@ -17,8 +17,6 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     }).format(value);
@@ -114,42 +112,66 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
           />
         </div>
 
-        <div className="w-[45%]">
-          <div className="grid grid-cols-2 gap-y-2 text-sm">
-            <div className="text-right font-bold text-gray-800">Subtotal</div>
-            <div className="text-right font-bold text-gray-800">{formatCurrency(subtotal)}</div>
-
-            {data.settings.showDiscount && (
-              <>
-                <div className="text-right font-bold text-gray-800">Total Diskon</div>
-                <div className="text-right font-bold text-gray-800">({formatCurrency(totalDiscount)})</div>
-              </>
+        <div className="w-[50%]">
+          <div className="w-full text-sm">
+            <div className="flex justify-between items-start mt-2">
+              <span className="font-bold text-gray-800 w-1/2">Subtotal</span>
+              <div className="flex justify-between items-start w-1/2 font-bold text-gray-800">
+                <span className="text-gray-600 mr-2">Rp</span>
+                <span>{formatCurrency(subtotal)}</span>
+              </div>
+            </div>
+            
+            {data.settings.showDiscount && totalDiscount > 0 && (
+              <div className="flex justify-between items-start mt-2">
+                <span className="font-bold text-gray-800 w-1/2">Diskon ({data.settings.discount}%)</span>
+                <div className="flex justify-between items-start w-1/2 font-bold text-red-600">
+                  <span className="text-gray-600 mr-2">Rp</span>
+                  <span>({formatCurrency(totalDiscount)})</span>
+                </div>
+              </div>
             )}
-
+            
             {data.settings.showTax && (
-              <>
-                <div className="text-right font-bold text-gray-800">Pajak</div>
-                <div className="text-right font-bold text-gray-800">{formatCurrency(totalTax)}</div>
-              </>
+              <div className="flex justify-between items-start mt-2">
+                <span className="font-bold text-gray-800 w-1/2">Pajak (PPN {data.settings.tax}%)</span>
+                <div className="flex justify-between items-start w-1/2 font-bold text-gray-800">
+                  <span className="text-gray-600 mr-2">Rp</span>
+                  <span>{formatCurrency(totalTax)}</span>
+                </div>
+              </div>
             )}
 
-            <div className="text-right font-bold text-gray-800 mt-2 pt-2 border-t border-gray-300 underline text-lg">Total</div>
-            <div className="text-right font-bold text-black mt-2 pt-2 border-t border-gray-300 underline text-2xl">{formatCurrency(grandTotal)}</div>
-
-            <div className="text-right font-bold text-gray-800 mt-4">Pembayaran Diterima</div>
-            <div className="text-right font-bold text-gray-800 mt-4 flex justify-end">
-              <EditableField
-                type="number"
-                value={(data.amountPaid || 0).toString()}
-                onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
-                align="right"
-                className="bg-transparent"
-                displayValue={formatCurrency(data.amountPaid || 0)}
-              />
+            <div className="flex justify-between items-start mt-2 pt-2 border-t border-gray-300">
+              <span className="font-bold text-black text-2xl w-1/2">Total</span>
+              <div className="flex justify-between items-start w-1/2 font-bold text-black underline text-2xl">
+                <span className="text-gray-600 mr-2">Rp</span>
+                <span>{formatCurrency(grandTotal)}</span>
+              </div>
             </div>
 
-            <div className="text-right font-bold text-gray-800 mt-2">Sisa Tagihan</div>
-            <div className="text-right font-bold text-gray-800 mt-2">{formatCurrency(grandTotal - (data.amountPaid || 0))}</div>
+            <div className="flex justify-between items-start mt-4">
+              <span className="font-bold text-gray-800 w-1/2">Pembayaran Diterima</span>
+              <div className="flex justify-between items-start w-1/2 font-bold text-gray-800">
+                <span className="text-gray-600 mr-2">Rp</span>
+                <EditableField
+                  type="number"
+                  value={(data.amountPaid || 0).toString()}
+                  onChange={(val) => onChange({ ...data, amountPaid: Number(val) })}
+                  align="right"
+                  className="bg-transparent w-full"
+                  displayValue={formatCurrency(data.amountPaid || 0)}
+                />
+              </div>
+            </div>
+
+            <div className="flex justify-between items-start mt-2">
+              <span className="font-bold text-gray-800 w-1/2">Sisa Tagihan</span>
+              <div className="flex justify-between items-start w-1/2 font-bold text-gray-800">
+                <span className="text-gray-600 mr-2">Rp</span>
+                <span>{formatCurrency(grandTotal - (data.amountPaid || 0))}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
