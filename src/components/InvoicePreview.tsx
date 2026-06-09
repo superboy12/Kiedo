@@ -45,7 +45,8 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
   // Pembayaran Diterima can be an editable field, Sisa Tagihan = Grand Total - Pembayaran Diterima.
 
   return (
-    <div ref={innerRef} className="bg-white w-full max-w-[900px] mx-auto p-12 shadow-sm font-sans text-[#333333] relative print:shadow-none print:p-0">
+    <div className="w-full overflow-x-auto">
+      <div ref={innerRef} className="bg-white w-[900px] mx-auto p-12 shadow-sm font-sans text-[#333333] relative print:shadow-none print:p-0">
       {/* HEADER */}
       <div className="flex justify-between items-start mb-12">
         <div className="w-[40%]">
@@ -160,6 +161,7 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
           <EditableField value={data.signatoryRole} onChange={(val) => updateField('signatoryRole', val)} className="text-xs text-gray-600 block w-full" align="center" />
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -26,20 +26,15 @@ export default function InvoiceBuilder() {
 
       const imgData = canvas.toDataURL('image/png');
       
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: 'a4',
-      });
-
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`invoice-${data.referenceNo.replace(/\//g, '-')}.pdf`);
+      const link = document.createElement('a');
+      link.href = imgData;
+      link.download = `invoice-${data.referenceNo.replace(/\//g, '-')}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch (error) {
-      console.error('Failed to generate PDF', error);
-      alert('Gagal membuat PDF.');
+      console.error('Failed to generate Image', error);
+      alert('Gagal membuat Gambar.');
     }
   };
 

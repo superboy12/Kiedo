@@ -16,7 +16,8 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
   };
 
   return (
-    <div ref={innerRef} className="bg-white w-full max-w-[900px] mx-auto p-12 shadow-sm font-sans text-black relative print:shadow-none print:p-0">
+    <div className="w-full overflow-x-auto">
+      <div ref={innerRef} className="bg-white w-[900px] mx-auto p-12 shadow-sm font-sans text-black relative print:shadow-none print:p-0">
       
       {/* HEADER SECTION */}
       <div className="flex justify-between items-start mb-12">
@@ -93,6 +94,7 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
             <EditableField value={data.signatoryRole} onChange={(val) => updateField('signatoryRole', val)} className="text-sm text-gray-800 block w-full" align="center" />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
