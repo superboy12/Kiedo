@@ -1,8 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import * as htmlToImage from 'html-to-image';
 import { InvoicePreview } from './InvoicePreview';
 import { InvoicePreviewTemplate2 } from './InvoicePreviewTemplate2';
 import { defaultInvoiceData } from '../constants/defaultData';
@@ -18,23 +17,20 @@ export default function InvoiceBuilder() {
 
     try {
       const element = invoiceRef.current;
-      const canvas = await html2canvas(element, {
-        scale: 2, // higher scale for better resolution
-        useCORS: true,
-        logging: false,
+      const dataUrl = await htmlToImage.toPng(element, {
+        quality: 1,
+        pixelRatio: 2,
       });
-
-      const imgData = canvas.toDataURL('image/png');
       
       const link = document.createElement('a');
-      link.href = imgData;
+      link.href = dataUrl;
       link.download = `invoice-${data.referenceNo.replace(/\//g, '-')}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Failed to generate Image', error);
-      alert('Gagal membuat Gambar.');
+      alert('Gagal membuat Gambar: ' + (error.message || 'Unknown error'));
     }
   };
 
