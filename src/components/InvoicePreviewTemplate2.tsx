@@ -23,20 +23,35 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
       <div className="flex justify-between items-start mb-12">
         <div className="w-[45%] flex flex-col items-center">
           {data.settings.showLogo !== false ? (
-            <ImageUpload
-              value={data.companyLogo}
-              onChange={(val) => updateField('companyLogo', val)}
-              label="Upload Logo"
-              width="250px"
-              className="mb-4"
-            />
+            <div className="flex flex-col items-center mb-4">
+              <ImageUpload
+                value={data.companyLogo}
+                onChange={(val) => updateField('companyLogo', val)}
+                label="Upload Logo"
+                width="250px"
+              />
+              <button 
+                onClick={() => onChange({ ...data, settings: { ...data.settings, showLogo: false } })}
+                className="text-xs text-gray-400 hover:text-red-500 mt-2 transition-colors print:hidden hide-for-download"
+              >
+                Tutup kotak logo (Mode Perorangan)
+              </button>
+            </div>
           ) : (
-            <EditableField 
-              value={data.companyName} 
-              onChange={(val) => updateField('companyName', val)} 
-              className="text-[28px] font-bold text-[#1a202c] text-center block mb-2 leading-tight" 
-              align="center" 
-            />
+            <div className="flex flex-col items-center w-full">
+              <EditableField 
+                value={data.companyName} 
+                onChange={(val) => updateField('companyName', val)} 
+                className="text-[28px] font-bold text-[#1a202c] text-center block mb-2 leading-tight w-full" 
+                align="center" 
+              />
+              <button 
+                onClick={() => onChange({ ...data, settings: { ...data.settings, showLogo: true } })}
+                className="text-xs text-blue-500 hover:underline mb-2 print:hidden hide-for-download"
+              >
+                + Tambahkan Logo Perusahaan
+              </button>
+            </div>
           )}
           <EditableField value={data.companyAddress} onChange={(val) => updateField('companyAddress', val)} className="text-sm text-center block mb-0" align="center" />
           <EditableField value={data.companyPhone} onChange={(val) => updateField('companyPhone', val)} className="text-sm text-center block mb-0" align="center" />

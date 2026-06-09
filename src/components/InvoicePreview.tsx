@@ -48,13 +48,28 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
       {/* HEADER */}
       <div className="flex justify-between items-start mb-12">
         <div className="w-[40%]">
-          {data.settings.showLogo !== false && (
-            <ImageUpload
-              value={data.companyLogo}
-              onChange={(val) => updateField('companyLogo', val)}
-              label="Upload Logo"
-              width="180px"
-            />
+          {data.settings.showLogo !== false ? (
+            <div className="flex flex-col items-start">
+              <ImageUpload
+                value={data.companyLogo}
+                onChange={(val) => updateField('companyLogo', val)}
+                label="Upload Logo"
+                width="180px"
+              />
+              <button 
+                onClick={() => onChange({ ...data, settings: { ...data.settings, showLogo: false } })}
+                className="text-xs text-gray-400 hover:text-red-500 mt-2 transition-colors print:hidden hide-for-download"
+              >
+                Tutup kotak logo (Mode Perorangan)
+              </button>
+            </div>
+          ) : (
+            <button 
+              onClick={() => onChange({ ...data, settings: { ...data.settings, showLogo: true } })}
+              className="text-xs text-blue-500 hover:underline mb-4 print:hidden hide-for-download"
+            >
+              + Tambahkan Logo Perusahaan
+            </button>
           )}
         </div>
         <div className="w-[50%] flex flex-col items-end text-sm">
