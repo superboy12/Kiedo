@@ -124,7 +124,7 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
             
             {data.settings.showDiscount && totalDiscount > 0 && (
               <div className="flex justify-between items-start mt-2">
-                <span className="font-bold text-gray-800 w-1/2">Diskon ({data.settings.discount}%)</span>
+                <span className="font-bold text-gray-800 w-1/2">Total Diskon</span>
                 <div className="flex justify-between items-start w-1/2 font-bold text-red-600">
                   <span className="text-gray-600 mr-2">Rp</span>
                   <span>({formatCurrency(totalDiscount)})</span>
@@ -134,7 +134,7 @@ export const InvoicePreview: React.FC<InvoicePreviewProps> = ({ data, onChange, 
             
             {data.settings.showTax && (
               <div className="flex justify-between items-start mt-2">
-                <span className="font-bold text-gray-800 w-1/2">Pajak (PPN {data.settings.tax}%)</span>
+                <span className="font-bold text-gray-800 w-1/2">Total Pajak</span>
                 <div className="flex justify-between items-start w-1/2 font-bold text-gray-800">
                   <span className="text-gray-600 mr-2">Rp</span>
                   <span>{formatCurrency(totalTax)}</span>
