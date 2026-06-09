@@ -17,7 +17,7 @@ export const InvoicePreviewTemplate2: React.FC<InvoicePreviewTemplate2Props> = (
 
   return (
     <div className="w-full overflow-x-auto">
-      <div ref={innerRef} className="bg-white w-[900px] mx-auto p-12 shadow-sm font-sans text-black relative print:shadow-none print:p-0">
+      <div ref={innerRef} className="bg-white w-[1123px] mx-auto p-12 shadow-sm font-sans text-black relative print:shadow-none print:p-0">
       
       {/* HEADER SECTION */}
       <div className="flex justify-between items-start mb-12">
