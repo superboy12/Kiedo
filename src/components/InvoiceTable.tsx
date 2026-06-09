@@ -119,17 +119,15 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
                 className="bg-transparent"
               />
             </div>
-            <div className="p-3 flex items-start justify-end">
-              <span className="mr-1 mt-1 text-gray-600">Rp</span>
-              <div className="w-24">
-                <EditableField
-                  type="number"
-                  value={item.price.toString()}
-                  onChange={(val) => handleItemChange(index, 'price', Number(val))}
-                  align="right"
-                  className="bg-transparent"
-                />
-              </div>
+            <div className="p-3">
+              <EditableField
+                type="number"
+                value={item.price.toString()}
+                onChange={(val) => handleItemChange(index, 'price', Number(val))}
+                align="right"
+                className="bg-transparent"
+                displayValue={formatCurrency(item.price)}
+              />
             </div>
             {data.settings.showDiscount && (
               <div className="p-3 whitespace-nowrap text-center">

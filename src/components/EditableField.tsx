@@ -9,6 +9,7 @@ interface EditableFieldProps {
   multiline?: boolean;
   align?: 'left' | 'right' | 'center';
   type?: 'text' | 'number';
+  displayValue?: string;
 }
 
 export const EditableField: React.FC<EditableFieldProps> = ({
@@ -19,6 +20,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
   multiline = false,
   align = 'left',
   type = 'text',
+  displayValue,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [tempValue, setTempValue] = useState(value);
@@ -87,7 +89,7 @@ export const EditableField: React.FC<EditableFieldProps> = ({
       className={`group relative cursor-pointer hover:bg-gray-50 rounded px-1 -mx-1 border border-transparent hover:border-gray-200 transition-colors ${alignClass} ${className}`}
       onClick={() => setIsEditing(true)}
     >
-      {value || <span className="text-gray-400 italic">{placeholder}</span>}
+      {displayValue !== undefined ? displayValue : (value || <span className="text-gray-400 italic">{placeholder}</span>)}
       <Pencil className="w-3 h-3 text-blue-500 absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
   );
