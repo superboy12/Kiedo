@@ -20,8 +20,6 @@ export default function InvoiceBuilder() {
       const dataUrl = await htmlToImage.toPng(element, {
         quality: 1,
         pixelRatio: 2,
-        skipFonts: true,
-        cacheBust: true,
       });
       
       const link = document.createElement('a');
