@@ -102,21 +102,22 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
             className="grid group border-b border-black last:border-b-0 relative"
             style={{ gridTemplateColumns: gridColumns }}
           >
-            <div className="p-2 border-r border-black flex items-center">
+            <div className="p-2 border-r border-black">
               <EditableField
                 value={item.product}
                 onChange={(val) => handleItemChange(index, 'product', val)}
                 className="bg-transparent"
               />
             </div>
-            <div className="p-2 border-r border-black flex items-center">
+            <div className="p-2 border-r border-black">
               <EditableField
                 value={item.description}
                 onChange={(val) => handleItemChange(index, 'description', val)}
                 className="bg-transparent"
+                multiline={true}
               />
             </div>
-            <div className="p-2 border-r border-black flex items-center justify-center">
+            <div className="p-2 border-r border-black">
               <EditableField
                 type="number"
                 value={item.quantity.toString()}
@@ -125,7 +126,7 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                 className="bg-transparent"
               />
             </div>
-            <div className="p-2 border-r border-black flex items-center justify-end">
+            <div className="p-2 border-r border-black">
               <EditableField
                 type="number"
                 value={item.price.toString()}
@@ -135,7 +136,7 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
               />
             </div>
             {data.settings.showDiscount && (
-              <div className="p-2 border-r border-black flex items-center justify-center whitespace-nowrap">
+              <div className="p-2 border-r border-black whitespace-nowrap text-center">
                 <EditableField
                   type="number"
                   value={item.discount.toString()}
@@ -147,7 +148,7 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
               </div>
             )}
             {data.settings.showTax && (
-              <div className="p-2 border-r border-black flex items-center justify-center whitespace-nowrap">
+              <div className="p-2 border-r border-black whitespace-nowrap text-center">
                 PPN <EditableField
                   value={item.tax.toString()}
                   onChange={(val) => handleItemChange(index, 'tax', Number(val))}
@@ -156,7 +157,7 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                 />%
               </div>
             )}
-            <div className="p-2 flex items-center justify-end">
+            <div className="p-2 text-right">
               {formatCurrency(calculateRowTotal(item)).replace('Rp', '').trim()}
             </div>
             

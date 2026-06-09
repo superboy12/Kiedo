@@ -92,33 +92,34 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
         {data.items.map((item, index) => (
           <div 
             key={item.id} 
-            className="grid min-h-[45px] items-center px-4 bg-[#F4F5F7] border-b border-gray-200 text-sm group relative"
+            className="grid group border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors relative"
             style={{ gridTemplateColumns: gridColumns }}
           >
-            <div className="pr-2 py-2">
+            <div className="p-3">
               <EditableField
                 value={item.product}
                 onChange={(val) => handleItemChange(index, 'product', val)}
-                className="font-medium text-gray-800 bg-transparent"
+                className="bg-transparent"
               />
             </div>
-            <div className="px-2 py-2 border-l border-gray-200">
+            <div className="p-3 text-gray-500">
               <EditableField
                 value={item.description}
                 onChange={(val) => handleItemChange(index, 'description', val)}
-                className="text-gray-600 bg-transparent"
+                className="bg-transparent"
+                multiline={true}
               />
             </div>
-            <div className="px-2 py-2 border-l border-gray-200">
+            <div className="p-3">
               <EditableField
                 type="number"
                 value={item.quantity.toString()}
                 onChange={(val) => handleItemChange(index, 'quantity', Number(val))}
-                align="right"
+                align="center"
                 className="bg-transparent"
               />
             </div>
-            <div className="px-2 py-2 border-l border-gray-200">
+            <div className="p-3">
               <EditableField
                 type="number"
                 value={item.price.toString()}
@@ -128,28 +129,30 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
               />
             </div>
             {data.settings.showDiscount && (
-              <div className="px-2 py-2 border-l border-gray-200">
+              <div className="p-3 whitespace-nowrap text-center">
                 <EditableField
                   type="number"
                   value={item.discount.toString()}
                   onChange={(val) => handleItemChange(index, 'discount', Number(val))}
-                  align="right"
-                  className="bg-transparent"
+                  align="center"
+                  className="bg-transparent inline-block w-8"
                 />
+                <span className="text-gray-500 ml-1">%</span>
               </div>
             )}
             {data.settings.showTax && (
-              <div className="px-2 py-2 border-l border-gray-200 text-right text-gray-600">
+              <div className="p-3 whitespace-nowrap text-center text-gray-500">
                 <EditableField
                   value={item.tax.toString()}
                   onChange={(val) => handleItemChange(index, 'tax', Number(val))}
-                  align="right"
-                  className="bg-transparent inline-block w-12"
+                  align="center"
+                  className="bg-transparent inline-block w-8 mr-1 text-gray-800"
                 />
+                %
               </div>
             )}
-            <div className="pl-2 py-2 border-l border-gray-200 text-right text-gray-800">
-              {formatCurrency(calculateRowTotal(item)).replace('Rp', '').trim()}
+            <div className="p-3 text-right font-medium">
+              {formatCurrency(calculateRowTotal(item))}
             </div>
             <div className="flex justify-end opacity-0 group-hover:opacity-100 transition-opacity print:hidden">
               <button onClick={() => removeItem(index)} className="text-red-500 hover:text-red-700 font-bold px-2">&times;</button>
