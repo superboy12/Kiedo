@@ -96,15 +96,7 @@ export default function InvoiceBuilder() {
               />
               <span className="text-sm text-gray-700">Tampilkan pajak</span>
             </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={data.settings.showUnit !== false}
-                onChange={(e) => updateSettings('showUnit', e.target.checked)}
-                className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
-              />
-              <span className="text-sm text-gray-700">Tampilkan satuan</span>
-            </label>
+
           </div>
 
           <div className="flex flex-col items-center">
