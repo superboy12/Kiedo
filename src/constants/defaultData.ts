@@ -31,9 +31,9 @@ export const defaultInvoiceData: InvoiceData = {
 
   notes: '',
   
-  signatureImage: '',
-  signatoryName: 'Nama Penandatangan',
-  signatoryRole: 'Peran Penandatangan',
+  signatureImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMDAgMTAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjEwMCI+PHBhdGggZD0iTSA1MCA3MCBRIDcwIDIwIDgwIDUwIFQgMTEwIDUwIFQgMTQwIDcwIFEgMTYwIDMwIDE3MCA1MCBUIDIwMCA0MCBUIDIzMCA2MCBRIDI1MCA4MCAyNzAgNTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzFlM2E4YSIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48L3N2Zz4=',
+  signatoryName: 'Budi Santoso',
+  signatoryRole: 'Finance Manager',
 
   amountPaid: 0,
 

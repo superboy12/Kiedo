@@ -12,8 +12,12 @@ export function useAutosave<T>(key: string, initialValue: T): [T, (value: T) => 
         const parsed = JSON.parse(item);
         
         // Fix for html2canvas tainted canvas error caused by non-base64 SVG data URIs
-        if (parsed.signatureImage && parsed.signatureImage.includes('data:image/svg+xml;utf8')) {
-          parsed.signatureImage = '';
+        if (parsed.signatureImage && parsed.signatureImage.includes('data:image/svg+xml;utf8,')) {
+          parsed.signatureImage = (initialValue as any).signatureImage;
+        }
+        
+        if (!parsed.signatureImage) {
+          parsed.signatureImage = (initialValue as any).signatureImage;
         }
 
         // Shallow merge top level, and specifically merge settings
