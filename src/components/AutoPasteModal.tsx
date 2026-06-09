@@ -32,7 +32,8 @@ export const AutoPasteModal: React.FC<AutoPasteModalProps> = ({ isOpen, onClose,
   const handleApply = () => {
     if (!text.trim()) return;
 
-    const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+    // Filter out completely empty lines but keep structure, split by newline and tab to handle Excel pastes
+    const lines = text.split(/[\n\t]+/).map(l => l.trim()).filter(l => l.length > 0);
     
     const partialData: Partial<InvoiceData> = {
       items: [],

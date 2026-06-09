@@ -119,15 +119,18 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
               <select 
                 value={item.unit || 'pcs'} 
                 onChange={(e) => handleItemChange(index, 'unit', e.target.value)}
-                className="bg-transparent text-gray-600 outline-none cursor-pointer text-left hover:bg-gray-50 rounded"
+                className="bg-transparent text-gray-600 outline-none cursor-pointer text-left hover:bg-gray-100 p-1 rounded"
               >
                 <option value="pcs">pcs</option>
+                <option value="lbr">lbr</option>
                 <option value="sak">sak</option>
+                <option value="meter">meter</option>
                 <option value="m²">m²</option>
                 <option value="m³">m³</option>
-                <option value="lbr">lbr</option>
-                <option value="kg">kg</option>
+                <option value="hari">hari</option>
                 <option value="unit">unit</option>
+                <option value="set">set</option>
+                <option value="kg">kg</option>
                 <option value="ls">ls</option>
                 <option value="">-</option>
               </select>
