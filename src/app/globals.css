@@ -9,6 +9,11 @@ body {
   color: #333333;
 }
 
+/* Hide elements when downloading image */
+.hide-for-download .print\:hidden {
+  display: none !important;
+}
+
 /* Hide print elements */
 @media print {
   .print\:hidden {

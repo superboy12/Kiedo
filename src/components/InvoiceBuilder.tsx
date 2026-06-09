@@ -17,12 +17,14 @@ export default function InvoiceBuilder() {
 
     try {
       const element = invoiceRef.current;
+      // Add class to hide print:hidden elements via CSS
+      element.classList.add('hide-for-download');
+      
       const dataUrl = await htmlToImage.toPng(element, {
         quality: 1,
         pixelRatio: 2,
+        // Fallback filter just in case
         filter: (node) => {
-          // Exclude elements that are meant to be hidden in print/image
-          // Avoid instanceof HTMLElement as it can fail in cloned contexts
           const el = node as any;
           if (el && el.classList && typeof el.classList.contains === 'function' && el.classList.contains('print:hidden')) {
             return false;
@@ -40,6 +42,10 @@ export default function InvoiceBuilder() {
     } catch (error: any) {
       console.error('Failed to generate Image', error);
       alert('Gagal membuat Gambar: ' + (error.message || 'Unknown error'));
+    } finally {
+      if (invoiceRef.current) {
+        invoiceRef.current.classList.remove('hide-for-download');
+      }
     }
   };
 
