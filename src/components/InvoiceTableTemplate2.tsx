@@ -123,7 +123,7 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                 align="center"
                 className="bg-transparent w-12"
               />
-              {data.settings.showUnit && (
+              {data.settings.showUnit !== false && (
                 <select 
                   value={item.unit || 'pcs'} 
                   onChange={(e) => handleItemChange(index, 'unit', e.target.value)}
@@ -136,6 +136,7 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
                   <option value="kg">kg</option>
                   <option value="unit">unit</option>
                   <option value="ls">ls</option>
+                  <option value="">-</option>
                 </select>
               )}
             </div>

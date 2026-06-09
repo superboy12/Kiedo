@@ -99,7 +99,7 @@ export default function InvoiceBuilder() {
             <label className="flex items-center gap-2 cursor-pointer">
               <input
                 type="checkbox"
-                checked={data.settings.showUnit}
+                checked={data.settings.showUnit !== false}
                 onChange={(e) => updateSettings('showUnit', e.target.checked)}
                 className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500"
               />
