@@ -39,6 +39,7 @@ export interface InvoiceItem {
   product: string;
   description: string;
   quantity: number;
+  unit?: string;
   price: number;
   discount: number; // in percentage
   tax: number; // in percentage, usually 10%

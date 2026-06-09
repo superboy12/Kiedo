@@ -108,14 +108,29 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
                 multiline={true}
               />
             </div>
-            <div className="p-3">
+            <div className="p-3 flex justify-center items-center gap-1">
               <EditableField
                 type="number"
                 value={item.quantity.toString()}
                 onChange={(val) => handleItemChange(index, 'quantity', Number(val))}
                 align="center"
-                className="bg-transparent"
+                className="bg-transparent w-12"
               />
+              {data.settings.showUnit && (
+                <select 
+                  value={item.unit || 'pcs'} 
+                  onChange={(e) => handleItemChange(index, 'unit', e.target.value)}
+                  className="bg-transparent text-gray-600 outline-none cursor-pointer appearance-none text-left hover:bg-gray-50 rounded"
+                >
+                  <option value="pcs">pcs</option>
+                  <option value="sak">sak</option>
+                  <option value="m²">m²</option>
+                  <option value="lbr">lbr</option>
+                  <option value="kg">kg</option>
+                  <option value="unit">unit</option>
+                  <option value="ls">ls</option>
+                </select>
+              )}
             </div>
             <div className="p-3 flex justify-between items-start">
               <span className="text-gray-600 mr-2">Rp</span>

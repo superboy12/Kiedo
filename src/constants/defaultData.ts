@@ -23,6 +23,7 @@ export const defaultInvoiceData: InvoiceData = {
       product: 'Nama Produk',
       description: 'Deskripsi produk',
       quantity: 1,
+      unit: 'pcs',
       price: 0,
       discount: 0,
       tax: 10,
@@ -40,7 +41,7 @@ export const defaultInvoiceData: InvoiceData = {
   settings: {
     showDiscount: true,
     showTax: true,
-    showUnit: false,
+    showUnit: true,
     templateId: 'template1',
     status: 'Dibayar Sebagian'
   }
