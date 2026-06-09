@@ -167,23 +167,16 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
         ))}
       </div>
 
-      <div className="mt-4 print:hidden">
-        <button
-          onClick={addItem}
-          className="text-blue-500 border border-blue-500 px-4 py-2 rounded text-sm hover:bg-blue-50 flex items-center gap-1 transition-colors"
-        >
-          <span>+</span> Tambah Produk
-        </button>
-      </div>
-
       {/* Totals Section */}
       <div className="flex flex-col border-r border-black w-full">
         {(() => {
           const emptyColumnsCount = 3 + (data.settings.showDiscount ? 1 : 0) + (data.settings.showTax ? 1 : 0);
           
-          const renderRow = (label: React.ReactNode, value: React.ReactNode) => (
+          const renderRow = (label: React.ReactNode, value: React.ReactNode, emptyContent?: React.ReactNode) => (
             <div className="grid w-full" style={{ gridTemplateColumns: gridColumns }}>
-              <div style={{ gridColumn: `span ${emptyColumnsCount}` }}></div>
+              <div style={{ gridColumn: `span ${emptyColumnsCount}` }} className="relative">
+                {emptyContent}
+              </div>
               <div className="p-2 border-l border-r border-b border-black bg-white">{label}</div>
               <div className="p-2 border-b border-black text-right bg-white flex justify-end items-center">{value}</div>
             </div>
@@ -191,7 +184,16 @@ export const InvoiceTableTemplate2: React.FC<InvoiceTableTemplate2Props> = ({ da
 
           return (
             <>
-              {renderRow("Subtotal", formatCurrency(subtotal))}
+              {renderRow("Subtotal", formatCurrency(subtotal), (
+                <div className="absolute top-4 left-0 print:hidden">
+                  <button
+                    onClick={addItem}
+                    className="text-blue-500 border border-blue-500 px-4 py-2 rounded text-sm hover:bg-blue-50 flex items-center gap-1 transition-colors"
+                  >
+                    <span>+</span> Tambah Produk
+                  </button>
+                </div>
+              ))}
               {data.settings.showTax && renderRow("Pajak", formatCurrency(totalTax))}
               {renderRow("Total", formatCurrency(grandTotal))}
               {renderRow("Pembayaran Diterima", (
