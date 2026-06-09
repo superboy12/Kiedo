@@ -52,7 +52,7 @@ export default function InvoiceBuilder() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-4 flex flex-col items-center">
-      <div className="w-full max-w-[900px]">
+      <div className="w-full max-w-[1320px]">
         {/* Invoice Area */}
         <div className="shadow-lg mb-8">
           {data.settings.templateId === 'template2' ? (
