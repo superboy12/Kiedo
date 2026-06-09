@@ -124,6 +124,7 @@ export const InvoiceTable: React.FC<InvoiceTableProps> = ({ data, onChange }) =>
                 <option value="pcs">pcs</option>
                 <option value="sak">sak</option>
                 <option value="m²">m²</option>
+                <option value="m³">m³</option>
                 <option value="lbr">lbr</option>
                 <option value="kg">kg</option>
                 <option value="unit">unit</option>
